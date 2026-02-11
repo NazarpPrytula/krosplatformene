@@ -1,5 +1,4 @@
-
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
 export default function DetailsScreen({ route, navigation }) {
   const { message } = route.params;
@@ -7,41 +6,15 @@ export default function DetailsScreen({ route, navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Екран деталей</Text>
+      <Text style={styles.message}>{message}</Text>
 
-      <Text style={styles.message}>
-        {message}
-      </Text>
-
-      <View style={styles.button}>
-        <Button
-          title="Повернутися назад"
-          onPress={() => navigation.goBack()}
-        />
-      </View>
+      <Button title="Назад" onPress={() => navigation.goBack()} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f2f2f2',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  message: {
-    fontSize: 20,
-    color: 'blue',
-    textAlign: 'center',
-    marginBottom: 30,
-  },
-  button: {
-    width: 200,
-  },
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
+  title: { fontSize: 26, fontWeight: 'bold', marginBottom: 20 },
+  message: { fontSize: 20, color: 'blue', textAlign: 'center', marginBottom: 20 }
 });
