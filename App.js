@@ -6,6 +6,7 @@ import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import ProfileScreen from './ProfileScreen';
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
