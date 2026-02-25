@@ -14,14 +14,12 @@ import { UserContext } from './UserContext';
 import ModalExample from './ModalExample';
 
 export default function HomeScreen({ navigation }) {
-  const { userName: contextUserName } = useContext(UserContext);
+  const { userName } = useContext(UserContext); 
 
-  
   const [inputName, setInputName] = useState('');
   const [inputEmail, setInputEmail] = useState('');
   const [formError, setFormError] = useState('');
 
-  
   const [users, setUsers] = useState([]);
   const [usersLoading, setUsersLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -60,7 +58,7 @@ export default function HomeScreen({ navigation }) {
 
   const handleSubmit = () => {
     if (inputName.trim() === '' || inputEmail.trim() === '') {
-      setFormError('Будь ласка, заповніть усі поля!');
+      setFormError('Будь ласка, заповніть усі поля!'); 
     } else {
       setFormError('');
       console.log('Дані форми:', { name: inputName, email: inputEmail });
@@ -70,10 +68,9 @@ export default function HomeScreen({ navigation }) {
     }
   };
 
-  
   const renderHeader = () => (
     <View style={styles.header}>
-      <Text style={styles.welcomeTitle}>Привіт, {contextUserName}! 👋</Text>
+      <Text style={styles.welcomeTitle}>Привіт, {userName}! 👋</Text>
 
       <View style={styles.formContainer}>
         <Text style={styles.formTitle}>Реєстрація</Text>
@@ -85,7 +82,6 @@ export default function HomeScreen({ navigation }) {
           onChangeText={(text) => setInputName(text)} 
         />
         
-      
         <TextInput
           style={styles.input}
           placeholder="Електронна пошта"
@@ -103,8 +99,7 @@ export default function HomeScreen({ navigation }) {
 
       <Text style={styles.welcomeTitle}>Лаба 9</Text>
     
-   
-        <UserStorage />
+      <UserStorage />
 
       <View style={styles.buttonContainer}>
         <Button title="Редагувати профіль" onPress={() => navigation.navigate("Profile")} color="#6c757d" />
@@ -152,7 +147,6 @@ export default function HomeScreen({ navigation }) {
       <FlatList
         data={users}
         keyExtractor={(item) => item.id.toString()}
-        
         ListHeaderComponent={renderHeader()} 
         renderItem={({ item }) => (
           <TouchableOpacity 
@@ -182,9 +176,6 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     marginBottom: 20,
     elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
   },
   formTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 15, textAlign: 'center' },
   input: {
@@ -195,7 +186,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingHorizontal: 10,
     backgroundColor: '#fafafa',
-    color: '#000'
   },
   errorText: { color: 'red', marginBottom: 10, textAlign: 'center' },
   buttonWrapper: { marginTop: 5 },
