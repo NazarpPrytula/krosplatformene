@@ -8,10 +8,12 @@ import {
   StyleSheet, 
   TouchableOpacity, 
   Button, 
-  TextInput 
+  TextInput,
+  Image 
 } from 'react-native';
 import { UserContext } from './UserContext';
 import ModalExample from './ModalExample';
+import { ScrollView } from 'react-native-web';
 
 export default function HomeScreen({ navigation }) {
   const { userName } = useContext(UserContext); 
@@ -70,6 +72,24 @@ export default function HomeScreen({ navigation }) {
 
   const renderHeader = () => (
     <View style={styles.header}>
+      <ScrollView contentContainerStyle={styles.lolcontainer}>  
+        <Image
+          source={require('./assets/house.jpg')}
+          style={styles.localImage}
+          resizeMode="contain"
+      
+       />
+        <Image
+          source={ {uri: 'https://thermohouse.ie/wp-content/uploads/2019/04/hero-image.jpg'}}
+          style={styles.networkImage}
+          resizeMode="stretch"
+      
+       />
+        
+
+
+
+       </ScrollView>
       <Text style={styles.welcomeTitle}>Привіт, {userName}! 👋</Text>
 
       <View style={styles.formContainer}>
@@ -127,10 +147,16 @@ export default function HomeScreen({ navigation }) {
               </View>
             ))
           )}
+        
         </View>
       )}
 
       <Text style={[styles.subtitle, { marginTop: 20 }]}>Список користувачів API:</Text>
+      
+      
+      
+        
+      
     </View>
   );
 
@@ -161,6 +187,7 @@ export default function HomeScreen({ navigation }) {
       />
     </View>
   );
+  
 }
 
 const styles = StyleSheet.create({
@@ -204,5 +231,23 @@ const styles = StyleSheet.create({
   userName: { fontSize: 16, fontWeight: 'bold' },
   userEmail: { color: '#666' },
   productItem: { padding: 8, backgroundColor: '#fff', marginBottom: 5, borderRadius: 5 },
-  productTitle: { fontSize: 14, color: '#333' }
+  productTitle: { fontSize: 14, color: '#333' },
+  lolcontainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: 'center',
+    padding: 20
+  },
+  localImage:{
+    width:150,
+    height:150,
+    marginBottom: 20,
+    borderRadius:10
+  },
+  networkImage: {
+    width: 150,
+    height:150,
+    borderRadius:20
+
+  }
 });
