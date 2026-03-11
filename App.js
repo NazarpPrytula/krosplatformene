@@ -5,8 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import ProfileScreen from './ProfileScreen';
-
-
+import TaskListScreen from './tasklistscreen';
+import AddTaskScreen from './AddTaskScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -14,8 +14,17 @@ export default function App() {
     <UserProvider>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen 
+            name="AddTask" 
+            component={AddTaskScreen} 
+            options={{ title: 'Новий запис у хмару' }} 
+          />
+          
+          
           
           <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Список користувачів' }} />
+          <Stack.Screen name="TaskList" component={TaskListScreen} options={{title: '1234'}} />
+          
           <Stack.Screen name="Details" component={DetailsScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
         </Stack.Navigator>

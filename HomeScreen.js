@@ -9,11 +9,11 @@ import {
   TouchableOpacity, 
   Button, 
   TextInput,
-  Image 
+  Image,
+  ScrollView 
 } from 'react-native';
 import { UserContext } from './UserContext';
 import ModalExample from './ModalExample';
-import { ScrollView } from 'react-native-web';
 
 export default function HomeScreen({ navigation }) {
   const { userName } = useContext(UserContext); 
@@ -72,53 +72,59 @@ export default function HomeScreen({ navigation }) {
 
   const renderHeader = () => (
     <View style={styles.header}>
-      <ScrollView contentContainerStyle={styles.lolcontainer}>  
+      {/* Кнопки навігації Firebase */}
+      <View style={styles.firebaseButtons}>
+        <View style={styles.buttonContainer}>
+          <Button 
+            title="☁️ Список завдань" 
+            onPress={() => navigation.navigate("TaskList")} 
+            color="#3498db" 
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button 
+            title="➕ Додати завдання" 
+            onPress={() => navigation.navigate("AddTask")} 
+            color="#2ecc71" 
+          />
+        </View>
+      </View>
+
+      <ScrollView contentContainerStyle={styles.lolcontainer} horizontal={true} showsHorizontalScrollIndicator={false}> 
         <Image
           source={require('./assets/house.jpg')}
           style={styles.localImage}
           resizeMode="contain"
-      
-       />
+        />
         <Image
-          source={ {uri: 'https://thermohouse.ie/wp-content/uploads/2019/04/hero-image.jpg'}}
+          source={{uri: 'https://thermohouse.ie/wp-content/uploads/2019/04/hero-image.jpg'}}
           style={styles.networkImage}
           resizeMode="stretch"
-      
-       />
-        
-
-
-
-       </ScrollView>
-      <Text style={styles.welcomeTitle}>Привіт, {userName}! 👋</Text>
-
+        />
+      </ScrollView>
+     
       <View style={styles.formContainer}>
         <Text style={styles.formTitle}>Реєстрація</Text>
-        
         <TextInput
           style={styles.input}
           placeholder="Ім’я користувача"
           value={inputName}
           onChangeText={(text) => setInputName(text)} 
         />
-        
         <TextInput
           style={styles.input}
           placeholder="Електронна пошта"
           value={inputEmail}
-          keyboardType="email-address"
           onChangeText={(text) => setInputEmail(text)}
+          keyboardType="email-address"
         />
-        
         {formError ? <Text style={styles.errorText}>{formError}</Text> : null}
-
         <View style={styles.buttonWrapper}>
           <Button title="Надіслати" onPress={handleSubmit} color="#007AFF" />
         </View>
       </View>
 
       <Text style={styles.welcomeTitle}>Лаба 9</Text>
-    
       <UserStorage />
 
       <View style={styles.buttonContainer}>
@@ -147,16 +153,10 @@ export default function HomeScreen({ navigation }) {
               </View>
             ))
           )}
-        
         </View>
       )}
 
       <Text style={[styles.subtitle, { marginTop: 20 }]}>Список користувачів API:</Text>
-      
-      
-      
-        
-      
     </View>
   );
 
@@ -187,13 +187,13 @@ export default function HomeScreen({ navigation }) {
       />
     </View>
   );
-  
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f0f2f5' },
   center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   header: { padding: 20, backgroundColor: '#fff' },
+  firebaseButtons: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15 },
   welcomeTitle: { fontSize: 22, fontWeight: 'bold', textAlign: 'center', marginBottom: 20 },
   formContainer: {
     backgroundColor: '#fff',
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   },
   errorText: { color: 'red', marginBottom: 10, textAlign: 'center' },
   buttonWrapper: { marginTop: 5 },
-  buttonContainer: { marginBottom: 10 },
+  buttonContainer: { marginBottom: 10, flex: 0.48 }, // Трохи менше половини для ряду
   section: { marginTop: 10, padding: 10, backgroundColor: '#e9ecef', borderRadius: 10 },
   subtitle: { fontSize: 18, fontWeight: '700', marginBottom: 10 },
   listContent: { paddingBottom: 20 },
@@ -233,21 +233,18 @@ const styles = StyleSheet.create({
   productItem: { padding: 8, backgroundColor: '#fff', marginBottom: 5, borderRadius: 5 },
   productTitle: { fontSize: 14, color: '#333' },
   lolcontainer: {
-    flexGrow: 1,
-    justifyContent: "center",
+    paddingVertical: 10,
     alignItems: 'center',
-    padding: 20
   },
   localImage:{
-    width:150,
-    height:150,
-    marginBottom: 20,
-    borderRadius:10
+    width: 150,
+    height: 150,
+    marginRight: 15,
+    borderRadius: 10
   },
   networkImage: {
     width: 150,
-    height:150,
-    borderRadius:20
-
+    height: 150,
+    borderRadius: 20
   }
 });
