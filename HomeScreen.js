@@ -82,7 +82,7 @@ export default function HomeScreen({ navigation }) {
         <Image
           source={ {uri: 'https://thermohouse.ie/wp-content/uploads/2019/04/hero-image.jpg'}}
           style={styles.networkImage}
-          resizeMode="stretch"
+          resizeMode="cover"
       
        />
         
